@@ -20,7 +20,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/generateOrders")
+    @PostMapping("/generateOrders")
     public ResponseEntity<Message> generateOrders() {
         return orderService.generateOrders();
     }
@@ -30,7 +30,7 @@ public class OrderController {
         return orderService.checkOrders();
     }
 
-    @GetMapping("/completeOrder")
+    @PostMapping("/completeOrder")
     public ResponseEntity<Message> completeOrder() {
         return orderService.completeOrder();
     }

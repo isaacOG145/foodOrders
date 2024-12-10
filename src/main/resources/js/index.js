@@ -12,13 +12,17 @@ function showMessage(type, message) {
     }, 5000);
 }
 
+document.getElementById('goToKitchen').addEventListener('click', function() {
+
+    window.location.href = './kitchen.html';
+});
+
+
 document.getElementById('generateOrders').addEventListener('click', function() {
 
     fetch('http://localhost:8080/orders/generateOrders', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        }
+        method: 'POST'
+
     })
         .then(response => response.json())
         .then(data => {

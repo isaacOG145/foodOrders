@@ -8,34 +8,39 @@
 </head>
 <body class="bg-light">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Crustaseo castarudo</a>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Crustaseo Castarudo</a>
+    </div>
+</nav>
 
+<div class="container">
     <div class="row justify-content-center mb-5">
         <div class="col-auto">
-            <button id="viewOrder" class="btn btn-primary">Ver siguiente orden</button>
+            <button id="viewOrder" class="btn btn-primary btn-lg">Ver siguiente orden</button>
         </div>
+
         <div class="col-auto">
-            <button id="finishOrder" class="btn btn-success">Terminar orden</button>
+            <button id="finishOrder" class="btn btn-success btn-lg">Terminar orden</button>
         </div>
+
         <div class="col-auto">
-            <button id="ViewFinished" class="btn btn-info">Ver ordenes terminadas</button>
+            <button id="ViewFinished" class="btn btn-info btn-lg">Ver órdenes terminadas</button>
         </div>
     </div>
 
+    <div id="message" class="alert alert-dismissible" role="alert" style="display:none;">
+        <span id="message-text"></span>
+    </div>
 
     <div>
-        <table  id="orders-table" class="table table-bordered">
+        <table id="orders-table" class="table table-bordered">
             <thead>
             <tr>
                 <th colspan="2">Número de Pedido</th>
                 <th colspan="2">Nombre del Mesero</th>
             </tr>
             <tr>
-
                 <th>Pedido</th>
                 <th>Mesero</th>
                 <th>Platillo</th>
@@ -43,10 +48,11 @@
             </tr>
             </thead>
             <tbody>
-
             </tbody>
         </table>
     </div>
+</div>
 
+<script src="../js/kitchen.js"></script>
 </body>
 </html>
