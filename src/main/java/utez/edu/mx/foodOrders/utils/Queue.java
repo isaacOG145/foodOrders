@@ -85,7 +85,6 @@ public class Queue<T> {
         size = 0;
     }
 
-    // Método toString para representar la cola
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[");

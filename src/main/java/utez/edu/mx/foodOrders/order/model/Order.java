@@ -1,11 +1,14 @@
 package utez.edu.mx.foodOrders.order.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import utez.edu.mx.foodOrders.utils.*;
 
 public class Order {
 
     private int id;
     private Waiter waiter;
+
+    @JsonSerialize(using = DoubleLinkedListSerializer.class)
     private DoubleLinkedList<Food> foods;
 
     public Order(){}

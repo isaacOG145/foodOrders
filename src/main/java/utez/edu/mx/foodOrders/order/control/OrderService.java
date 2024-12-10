@@ -30,7 +30,7 @@ public class OrderService {
                 Order order = generateOrder();
                 ordersQueue.offer(order);
             }
-            return new ResponseEntity<>(new Message("Se agregaron " + orderCount + "ordenes",TypesResponse.SUCCESS), HttpStatus.OK);
+            return new ResponseEntity<>(new Message("Se agregaron " + orderCount + " ordenes",TypesResponse.SUCCESS), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(new Message("Hubo un error al generar las ordenes", TypesResponse.ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -40,6 +40,8 @@ public class OrderService {
         try {
 
             Order nextOrder = ordersQueue.peek();
+
+            System.out.println("Siguiente orden: " + nextOrder);
 
             if (nextOrder == null) {
                 return new ResponseEntity<>(new Message("No hay mas órdenes que atender.", TypesResponse.WARNING), HttpStatus.OK);
