@@ -35,6 +35,6 @@ document.getElementById('generateOrders').addEventListener('click', function() {
         })
         .catch(error => {
 
-            showMessage('danger', 'Hubo un problema al generar las órdenes. Intenta nuevamente.');
+            showMessage('error', 'Hubo un problema al generar las órdenes. Intenta nuevamente.');
         });
 });

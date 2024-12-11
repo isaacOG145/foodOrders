@@ -1,6 +1,7 @@
 package utez.edu.mx.foodOrders.order.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import utez.edu.mx.foodOrders.utils.DoubleLinkedListSerializer;
 import utez.edu.mx.foodOrders.utils.*;
 
 public class Order {
@@ -59,20 +60,20 @@ public class Order {
         StringBuilder sb = new StringBuilder();
         sb.append("ID de orden: ").append(id)
                 .append("\nMesero: ").append(waiter)
-                .append("\nPedidos: ");
+                .append("\nPedidos:\n");
 
         for (int i = 0; i < foods.size(); i++) {
-            sb.append(foods.get(i));
-            if (i < foods.size() - 1) {
-                sb.append(", ");
-            }
+            Food food = foods.get(i);
+            sb.append("- ").append(food)
+                    .append(" (Precio: ").append(food.getPrice()).append(")\n");
         }
 
         // Agregar el precio total
-        sb.append("\nTotal: ").append(getTotalPrice());
+        sb.append("Total: ").append(getTotalPrice());
 
         return sb.toString();
     }
+
 
 
 

@@ -1,24 +1,25 @@
 document.getElementById("viewOrder").addEventListener("click", () => {
-    fetch('http://localhost:8080/orders/checkOrder')  // Ajusta la URL según sea necesario
+    fetch('http://localhost:8080/orders/checkOrder')
         .then(response => response.json())
         .then(data => {
             if (data.type === "SUCCESS") {
-                const order = data.result; // Accede a los datos dentro de 'result'
-                // Llenar la tabla con la siguiente orden
-                const tableBody = document.querySelector("#orders-table tbody");
-                tableBody.innerHTML = ''; // Limpiar tabla antes de llenarla
+                const order = data.result;
 
-                // Crear la fila para la nueva orden
+                const tableBody = document.querySelector("#orders-table tbody");
+                tableBody.innerHTML = '';
+
                 const row = document.createElement("tr");
+
+                const foods = order.foods.map(food => `${food.name} (Precio: ${food.price})`).join("<br>");
+
                 row.innerHTML = `
                     <td>${order.id}</td>
                     <td>${order.waiter}</td>
-                    <td>${order.foods.join(", ")}</td> <!-- Unir los nombres de los platillos -->
+                    <td>${foods}</td>
                     <td>${order.totalPrice}</td>
                 `;
                 tableBody.appendChild(row);
 
-                // Mostrar mensaje de éxito
                 showMessage("Siguiente orden cargada correctamente", "SUCCESS");
             } else {
                 showMessage("No hay órdenes para atender", "WARNING");
@@ -29,14 +30,12 @@ document.getElementById("viewOrder").addEventListener("click", () => {
         });
 });
 
-// Función para mostrar los mensajes
 function showMessage(message, type) {
     const messageBox = document.getElementById("message");
     const messageText = document.getElementById("message-text");
     messageBox.style.display = "block";
     messageText.textContent = message;
 
-    // Cambiar el color del mensaje dependiendo del tipo
     if (type === "SUCCESS") {
         messageBox.classList.add("alert-success");
         messageBox.classList.remove("alert-warning", "alert-danger");
@@ -49,15 +48,17 @@ function showMessage(message, type) {
     }
 }
 
-// Manejo de la acción para terminar la orden
 document.getElementById("finishOrder").addEventListener("click", () => {
-    fetch('http://localhost:8080/orders/completeOrder')  // Ajusta la URL según sea necesario
+    fetch('http://localhost:8080/orders/completeOrder', {
+        method: 'POST'
+
+    })
         .then(response => response.json())
         .then(data => {
             if (data.type === "SUCCESS") {
                 showMessage("Orden completada correctamente", "SUCCESS");
-            } else {
-                showMessage("No hay órdenes para completar", "WARNING");
+            } else if(data.type === "WARNING") {
+                showMessage("No hay  órdenes para completar", "WARNING");
             }
         })
         .catch(error => {
@@ -65,23 +66,24 @@ document.getElementById("finishOrder").addEventListener("click", () => {
         });
 });
 
-// Manejo de la acción para ver las órdenes terminadas
 document.getElementById("ViewFinished").addEventListener("click", () => {
-    fetch('http://localhost:8080/orders/checkFinished')  // Ajusta la URL según sea necesario
+    fetch('http://localhost:8080/orders/checkFinished')
         .then(response => response.json())
         .then(data => {
             if (data.type === "SUCCESS") {
-                const finishedOrder = data.result; // Accede a la última orden completada
-                // Llenar la tabla con la orden completada
+                const finishedOrder = data.result;
                 const tableBody = document.querySelector("#orders-table tbody");
-                tableBody.innerHTML = ''; // Limpiar tabla antes de llenarla
+                tableBody.innerHTML = '';
 
-                // Crear la fila para la orden completada
+
                 const row = document.createElement("tr");
+
+                const foods = finishedOrder.foods.map(food => `${food.name} (Precio: ${food.price})`).join("<br>");
+
                 row.innerHTML = `
                     <td>${finishedOrder.id}</td>
                     <td>${finishedOrder.waiter}</td>
-                    <td>${finishedOrder.foods.join(", ")}</td> <!-- Unir los nombres de los platillos -->
+                    <td>${foods}</td> 
                     <td>${finishedOrder.totalPrice}</td>
                 `;
                 tableBody.appendChild(row);
